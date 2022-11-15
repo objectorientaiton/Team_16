@@ -41,6 +41,7 @@ class SignupFragment : Fragment() {
                 if(password == (confirmPW)){
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
                         if(it.isSuccessful){
+                            Toast.makeText(activity, "회원가입 성공", Toast.LENGTH_SHORT).show()
                             findNavController().navigate(R.id.action_signupFragment_to_mypageFragment)
 
                         }else{

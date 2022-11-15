@@ -17,6 +17,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:entries="@array/kau_dep_info"
+        android:scrollbarSize="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"

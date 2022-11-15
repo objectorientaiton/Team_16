@@ -57,9 +57,9 @@ class MypageFragment : Fragment() {
 
                 findNavController().navigate(R.id.action_mypageFragment_to_entryFragment3)
 
-                Toast.makeText(activity, "Successfully saved",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "정보가 입력 되었습니다.",Toast.LENGTH_SHORT).show()
             }.addOnFailureListener{
-                Toast.makeText(activity, "Failed",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "정보를 다시 입력하세요.",Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -97,7 +97,7 @@
             android:layout_marginEnd="60dp"
             android:layout_marginBottom="6dp"
             android:backgroundTint="#000470"
-            android:text="ID / PW 찾기"
+            android:text="PW 재설정"
             app:iconTint="#003F51B5" />
     </LinearLayout>
 

@@ -58,5 +58,9 @@ class EntryFragment : Fragment() {
 
             findNavController().navigate(R.id.action_entryFragment3_to_signupFragment)
         }
+
+        binding?.btnFind?.setOnClickListener{
+            findNavController().navigate(R.id.action_entryFragment3_to_findePWFragment)
+        }
     }
 }
