@@ -43,6 +43,7 @@ class EntryFragment : Fragment() {
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
                         Toast.makeText(activity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_entryFragment3_to_mainpage_fragment)
 
                     } else{
                         Toast.makeText(activity, "패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
