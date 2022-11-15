@@ -45,7 +45,7 @@ class EntryFragment : Fragment() {
                         Toast.makeText(activity, "로그인 성공", Toast.LENGTH_SHORT).show()
 
                     } else{
-                        Toast.makeText(activity, "패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "아이디 또는 패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }else{

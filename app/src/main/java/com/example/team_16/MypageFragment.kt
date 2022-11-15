@@ -1,17 +1,16 @@
 package com.example.team_16
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.example.team_16.databinding.FragmentMypageBinding
-import com.example.team_16.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -30,32 +29,30 @@ class MypageFragment : Fragment() {
         return binding?.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
 
-//        val department_data = arrayOf("경영학부","항공교통물류학부","항공운항학과","항공우주 및 기계공학부", "항공전자정보공학부", "소프트웨어학과", "스마트드론공학과", "AI자율주행시스템공학과", "자유전공학부")
-//
-//        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, department_data)
-//
-//        binding?.spinnerDep?.adapter = adapter as SpinnerAdapter?
+// val department_data = arrayOf("경영학부","항공교통물류학부","항공운항학과","항공우주 및 기계공학부", "항공전자정보공학부", "소프트웨어학과", "스마트드론공학과", "AI자율주행시스템공학과", "자유전공학부")
+
 
         binding?.btnRegisterMypage?.setOnClickListener{
             val email = binding?.etEmailMypage?.text.toString()
             val nickname = binding?.etNickname?.text.toString()
             val name = binding?.etName?.text.toString()
-           // val department = binding?.spinnerDep?.adapter.toString()
-            val department = binding?.etKaudepartment?.text.toString()
+            val department = binding?.spDep?.selectedItem.toString()
             val kauid = binding?.etKauID?.text.toString()
 
+
             database = FirebaseDatabase.getInstance().getReference("Users")
-            val User = User_Model(email, nickname, name, department,kauid)
+            val User = User_Model(email, nickname, name, department, kauid)
+
 
             database.child(nickname).setValue(User).addOnSuccessListener {
                 binding?.etEmailMypage?.text?.clear()
                 binding?.etNickname?.text?.clear()
                 binding?.etName?.text?.clear()
-                binding?.etKaudepartment?.text?.clear()
                 binding?.etKauID?.text?.clear()
 
                 findNavController().navigate(R.id.action_mypageFragment_to_entryFragment3)
@@ -66,9 +63,4 @@ class MypageFragment : Fragment() {
             }
         }
     }
-
-//    private fun <T> ArrayAdapter(mypageFragment: MypageFragment, simpleListItem1: Int, departmentData: Array<T>): Any {
-//
-//    }
-
 }

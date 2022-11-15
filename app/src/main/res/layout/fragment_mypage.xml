@@ -9,6 +9,19 @@
     tools:context=".MypageFragment" >
 
 
+    <Spinner
+        android:id="@+id/sp_dep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:entries="@array/kau_dep_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
     <TextView
         android:id="@+id/txt_mypage"
         android:layout_width="wrap_content"
@@ -33,9 +46,9 @@
         android:inputType="textAutoComplete"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_kaudepartment" />
+        app:layout_constraintTop_toBottomOf="@+id/sp_dep" />
 
     <EditText
         android:id="@+id/et_email_mypage"
@@ -83,24 +96,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_nickname" />
 
-    <EditText
-        android:id="@+id/et_kaudepartment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_margin="30dp"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:hint="학과를 선택하세요"
-        android:inputType="textAutoComplete"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_name" />
-
-
-<!--    <Spinner-->
+    <!--    <Spinner-->
 <!--        android:id="@+id/spinner_dep"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
@@ -121,4 +118,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_kauID" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
