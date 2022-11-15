@@ -11,4 +11,6 @@
         <item>AI자율주행시스템공학과</item>
         <item>자유전공학부</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
