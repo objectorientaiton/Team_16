@@ -19,8 +19,9 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
 
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.signupFragment, R.id.mypageFragment)
+            setOf(R.id.signupFragment, R.id.mypageFragment, R.id.Stopwatch)
         )
+
         setupActionBarWithNavController(navController)
         binding.bottomNav.setupWithNavController(navController)
         setContentView(binding.root)

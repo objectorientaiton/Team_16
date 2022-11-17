@@ -9,4 +9,8 @@
     <item
         android:id="@+id/mypageFragment"
         android:title="마이페이지" />
+    <item
+        android:id="@+id/Stopwatch"
+        android:icon="@drawable/ic_baseline_watch_later_24"
+        android:title="StopWatch" />
 </menu>

@@ -27,8 +27,11 @@ class mainpage_fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.gotoCalendar?.setOnClickListener{
-
             findNavController().navigate(R.id.action_mainpage_fragment_to_calendar_fragment)
+        }
+        binding?.gotoStopwatch?.setOnClickListener{
+
+            findNavController().navigate(R.id.action_mainpage_fragment_to_stopwatch)
         }
     }
 }

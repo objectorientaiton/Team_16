@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_mainpage_fragment_to_calendar_fragment"
             app:destination="@id/calendar_fragment" />
+        <action
+            android:id="@+id/action_mainpage_fragment_to_stopwatch"
+            app:destination="@id/stopwatch" />
     </fragment>
     <fragment
         android:id="@+id/calendar_fragment"
@@ -64,4 +67,9 @@
             android:id="@+id/action_findePWFragment_to_entryFragment3"
             app:destination="@id/entryFragment3" />
     </fragment>
+    <fragment
+        android:id="@+id/stopwatch"
+        android:name="com.example.team_16.Stopwatch"
+        android:label="fragment_stopwatch"
+        tools:layout="@layout/fragment_stopwatch" />
 </navigation>
