@@ -5,19 +5,30 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calendar_fragment" >
+    android:background="#002870"
+    android:foregroundTint="#FFFFFF"
+    tools:context=".calendar_fragment">
 
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="8dp"
+        android:alwaysDrawnWithCache="false"
+        android:animationCache="false"
+        android:background="#002870"
+        android:backgroundTint="#5200328A"
+        android:focusableInTouchMode="false"
+        android:focusedMonthDateColor="#FFF79D"
+        android:foregroundGravity="center"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/Edit_todo"
@@ -26,10 +37,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:drawableTint="#FFFFFF"
         android:ems="10"
+        android:foregroundTint="#FFFFFF"
         android:hint="할 일을 입력하세요."
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#86FFFEFE"
         app:layout_constraintBottom_toTopOf="@+id/swipeRefreshLayout"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,14 +67,19 @@
         <Button
             android:id="@+id/add_button"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="추가" />
+            android:layout_height="38dp"
+            android:backgroundTint="#FFF79D"
+            android:text="추가"
+            android:textColor="#002870" />
 
         <Button
             android:id="@+id/btn_re"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="적용" />
+            android:layout_height="38dp"
+            android:backgroundTint="#FFF79D"
+            android:text="적용"
+            android:textColor="#002870"
+            app:iconTint="#FFF79D" />
     </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
