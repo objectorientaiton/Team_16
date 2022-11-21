@@ -3,38 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/entryFragment3">
+    app:startDestination="@id/entryFragment">
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.team_16.SignupFragment"
         android:label="회원 가입"
         tools:layout="@layout/fragment_signup">
         <action
-            android:id="@+id/action_signupFragment_to_mypageFragment"
-            app:destination="@id/mypageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mypageFragment"
-        android:name="com.example.team_16.MypageFragment"
-        android:label="개인 정보 입력"
-        tools:layout="@layout/fragment_mypage">
+            android:id="@+id/action_signupFragment_to_register_user_info_Fragment"
+            app:destination="@id/MypageFragment" />
         <action
-            android:id="@+id/action_mypageFragment_to_entryFragment3"
-            app:destination="@id/entryFragment3" />
+            android:id="@+id/action_signupFragment_to_entryFragment"
+            app:destination="@id/MypageFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_Register_user_infoFragment"
+            app:destination="@id/MypageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/entryFragment3"
+        android:id="@+id/MypageFragment"
+        android:name="com.example.team_16.Register_user_infoFragment"
+        android:label="개인 정보 입력"
+        tools:layout="@layout/fragment_register_user_info">
+        <action
+            android:id="@+id/action_Register_user_infoFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/entryFragment"
         android:name="com.example.team_16.EntryFragment"
         android:label="메인 화면"
         tools:layout="@layout/fragment_entry">
         <action
-            android:id="@+id/action_entryFragment3_to_signupFragment"
+            android:id="@+id/action_entryFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
-            android:id="@+id/action_entryFragment3_to_mainpage_fragment"
+            android:id="@+id/action_entryFragment_to_mainpage_fragment"
             app:destination="@id/mainpage_fragment" />
         <action
-            android:id="@+id/action_entryFragment3_to_findePWFragment"
+            android:id="@+id/action_entryFragment_to_findePWFragment"
             app:destination="@id/findePWFragment" />
     </fragment>
     <fragment
@@ -48,6 +54,9 @@
         <action
             android:id="@+id/action_mainpage_fragment_to_stopwatch"
             app:destination="@id/stopwatch" />
+        <action
+            android:id="@+id/action_mainpage_fragment_to_mypageFragment"
+            app:destination="@id/mypageFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendar_fragment"
@@ -65,11 +74,16 @@
         tools:layout="@layout/fragment_newpw" >
         <action
             android:id="@+id/action_findePWFragment_to_entryFragment3"
-            app:destination="@id/entryFragment3" />
+            app:destination="@id/entryFragment" />
     </fragment>
     <fragment
         android:id="@+id/stopwatch"
         android:name="com.example.team_16.Stopwatch"
         android:label="fragment_stopwatch"
         tools:layout="@layout/fragment_stopwatch" />
+    <fragment
+        android:id="@+id/mypageFragment"
+        android:name="com.example.team_16.MypageFragment"
+        android:label="fragment_mypage"
+        tools:layout="@layout/fragment_mypage" />
 </navigation>

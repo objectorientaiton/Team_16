@@ -1,6 +1,5 @@
 package com.example.team_16
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.team_16.databinding.FragmentEntryBinding
 import com.example.team_16.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -42,7 +40,7 @@ class SignupFragment : Fragment() {
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
                         if(it.isSuccessful){
                             Toast.makeText(activity, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                            findNavController().navigate(R.id.action_signupFragment_to_mypageFragment)
+                            findNavController().navigate(R.id.action_signupFragment_to_Register_user_infoFragment)
 
                         }else{
                             Toast.makeText(activity, it.exception.toString(), Toast.LENGTH_SHORT).show()

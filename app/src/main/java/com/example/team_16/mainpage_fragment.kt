@@ -33,5 +33,9 @@ class mainpage_fragment : Fragment() {
 
             findNavController().navigate(R.id.action_mainpage_fragment_to_stopwatch)
         }
+
+        binding?.gotoMypage?.setOnClickListener{
+            findNavController().navigate(R.id.action_mainpage_fragment_to_mypageFragment)
+        }
     }
 }
