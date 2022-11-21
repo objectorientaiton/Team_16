@@ -1,5 +1,7 @@
 package com.example.team_16
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -8,8 +10,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.example.team_16.databinding.FragmentStopwatchBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -34,14 +39,17 @@ class Stopwatch : Fragment() {
 
     val db = FirebaseFirestore.getInstance()
 
+    @SuppressLint("SimpleDateFormat")
     var today = SimpleDateFormat("yyyy-MM-dd")
         .format(Date(System.currentTimeMillis())) //오늘 날짜
 
     private lateinit var binding: FragmentStopwatchBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val email = arguments?.getString("email")
+        setFragmentResult("email", bundleOf("email" to email))
         val docRef = db.collection("studytime").document("$today")
         docRef.get()
             .addOnSuccessListener { document ->

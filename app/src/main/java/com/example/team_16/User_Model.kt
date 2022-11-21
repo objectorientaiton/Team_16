@@ -1,9 +1,8 @@
 package com.example.team_16
 
-import android.provider.ContactsContract.CommonDataKinds.Nickname
 
 class User_Model (
-    var email: String? = null,
+    var email: String? = "None",
     var nickname: String? = null,
     var name: String? = null,
     var department: String? = null,

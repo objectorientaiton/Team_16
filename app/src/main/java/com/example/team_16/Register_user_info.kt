@@ -70,10 +70,10 @@ class Register_user_infoFragment : Fragment() {
             )
 
 
-            db.collection("Users")
-                .add(user_info)
+            db.collection("Users").document("$email")
+                .set(user_info)
                 .addOnSuccessListener { documentReference ->
-                    Log.d(ContentValues.TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+                    Log.d(ContentValues.TAG, "DocumentSnapshot written with ID")
                 }
                 .addOnFailureListener { e ->
                     Log.w(ContentValues.TAG, "Error adding document", e)

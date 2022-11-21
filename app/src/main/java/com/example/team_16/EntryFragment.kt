@@ -19,7 +19,6 @@ class EntryFragment : Fragment() {
     lateinit var auth : FirebaseAuth
     lateinit var database : DatabaseReference
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,12 +37,14 @@ class EntryFragment : Fragment() {
         binding?.btnLogin?.setOnClickListener{
             val email = binding?.etEmail?.text.toString()
             val password = binding?.etPw?.text.toString()
-
+            val bundle = Bundle().apply {
+                putString("email", email)
+            }
             if(email.isNotEmpty() && password.isNotEmpty()){
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
                         Toast.makeText(activity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_entryFragment_to_mainpage_fragment)
+                        findNavController().navigate(R.id.action_entryFragment_to_stopwatchFragment_, bundle)
 
                     } else{
                         Toast.makeText(activity, "아이디 또는 패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()

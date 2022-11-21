@@ -37,36 +37,17 @@
             android:id="@+id/action_entryFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
-            android:id="@+id/action_entryFragment_to_mainpage_fragment"
-            app:destination="@id/mainpage_fragment" />
-        <action
             android:id="@+id/action_entryFragment_to_findePWFragment"
             app:destination="@id/findePWFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mainpage_fragment"
-        android:name="com.example.team_16.mainpage_fragment"
-        android:label="fragment_mainpage_fragment"
-        tools:layout="@layout/fragment_mainpage_fragment" >
         <action
-            android:id="@+id/action_mainpage_fragment_to_calendar_fragment"
-            app:destination="@id/calendar_fragment" />
-        <action
-            android:id="@+id/action_mainpage_fragment_to_stopwatch"
-            app:destination="@id/stopwatch" />
-        <action
-            android:id="@+id/action_mainpage_fragment_to_mypageFragment"
-            app:destination="@id/mypageFragment" />
+            android:id="@+id/action_entryFragment_to_stopwatchFragment_"
+            app:destination="@id/stopwatchFragment_" />
     </fragment>
     <fragment
         android:id="@+id/calendar_fragment"
         android:name="com.example.team_16.calendar_fragment"
         android:label="fragment_calendar_fragment"
-        tools:layout="@layout/fragment_calendar_fragment" >
-        <action
-            android:id="@+id/action_calendar_fragment_to_mainpage_fragment"
-            app:destination="@id/mainpage_fragment" />
-    </fragment>
+        tools:layout="@layout/fragment_calendar_fragment" />
     <fragment
         android:id="@+id/findePWFragment"
         android:name="com.example.team_16.FindePWFragment"
@@ -77,10 +58,17 @@
             app:destination="@id/entryFragment" />
     </fragment>
     <fragment
-        android:id="@+id/stopwatch"
+        android:id="@+id/stopwatchFragment_"
         android:name="com.example.team_16.Stopwatch"
         android:label="fragment_stopwatch"
-        tools:layout="@layout/fragment_stopwatch" />
+        tools:layout="@layout/fragment_stopwatch" >
+        <action
+            android:id="@+id/action_stopwatchFragment__to_calendar_fragment"
+            app:destination="@id/calendar_fragment" />
+        <action
+            android:id="@+id/action_stopwatchFragment__to_mypageFragment"
+            app:destination="@id/mypageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mypageFragment"
         android:name="com.example.team_16.MypageFragment"

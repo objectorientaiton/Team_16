@@ -10,10 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team_16.databinding.FragmentCalendarFragmentBinding
 import com.example.team_16.databinding.FragmentMypageBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ServerTimestamp
 import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -22,13 +24,22 @@ var number = 0
 var itemList = arrayListOf<ListLayout>()
 var adapter = Todoadapter(itemList)
 class calendar_fragment : Fragment() {
+
     val db = FirebaseFirestore.getInstance()
     private lateinit var binding : FragmentCalendarFragmentBinding
+    var email : String? = "None"
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener("email"){key, bundle->
+            email = bundle.getString("email")
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        email = arguments?.getString("email")
         // Inflate the layout for this fragment
         binding = FragmentCalendarFragmentBinding.inflate(inflater)
         return binding?.root
@@ -46,8 +57,8 @@ class calendar_fragment : Fragment() {
             .addOnSuccessListener{result->
                 itemList.clear()
                 for (document in result){
-                    val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String)
-                    if(item.date == dateStr) {
+                    val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String, document["userid"] as String)
+                    if(item.date == dateStr&& email == item.userid) {
                         itemList.add(item)
                         if(item.counting.toInt() >= number)
                             number = item.counting.toInt()
@@ -64,8 +75,8 @@ class calendar_fragment : Fragment() {
                 .addOnSuccessListener{result->
                     itemList.clear()
                     for (document in result){
-                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String)
-                        if(item.date == dateStr) {
+                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String, document["userid"] as String)
+                        if(item.date == dateStr && email == item.userid) {
                             itemList.add(item)
                             if(item.counting.toInt() >= number)
                                 number = item.counting.toInt()
@@ -85,8 +96,8 @@ class calendar_fragment : Fragment() {
                 .addOnSuccessListener{result->
                     itemList.clear()
                     for (document in result){
-                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String)
-                        if(item.date == dateStr) {
+                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String, document["userid"] as String)
+                        if(item.date == dateStr && email == item.userid) {
                             itemList.add(item)
                             if(item.counting.toInt() >= number)
                                 number = item.counting.toInt()
@@ -104,8 +115,8 @@ class calendar_fragment : Fragment() {
                 .addOnSuccessListener{result->
                     itemList.clear()
                     for (document in result){
-                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String)
-                        if(dateStr == item.date)
+                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String, document["userid"] as String)
+                        if(dateStr == item.date && email == item.userid)
                             itemList.add(item)
                     }
                     adapter.notifyDataSetChanged()
@@ -117,12 +128,14 @@ class calendar_fragment : Fragment() {
         }
         binding.addButton.setOnClickListener {
             val todo = binding.EditTodo.text.toString()
+            binding.EditTodo.text.clear()
             number = number + 1
             val data = hashMapOf(
                 "description" to todo,
                 "date" to dateStr,
                 "counting" to number.toString(),
-                "checking" to "0"
+                "checking" to "0",
+                "userid" to email
             )
             db.collection("Contacts")
                 .document("${dateStr} $number")
@@ -138,8 +151,8 @@ class calendar_fragment : Fragment() {
                 .addOnSuccessListener{result->
                     itemList.clear()
                     for (document in result){
-                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String)
-                        if(dateStr == item.date)
+                        val item = ListLayout(document["date"] as String, document["description"] as String, document["counting"] as String, document["checking"] as String, document["userid"] as String)
+                        if(dateStr == item.date && email == item.userid)
                             itemList.add(item)
                     }
                     adapter.notifyDataSetChanged()

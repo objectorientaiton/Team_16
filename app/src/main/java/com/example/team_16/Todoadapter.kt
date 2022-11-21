@@ -52,7 +52,8 @@ class Todoadapter(private var itemList_ : ArrayList<ListLayout>): RecyclerView.A
                         "description" to itemList_.description,
                         "date" to itemList_.date,
                         "counting" to itemList_.counting,
-                        "checking" to check
+                        "checking" to check,
+                        "userid" to itemList_.userid
                     )
                     db.collection("Contacts").document("${itemList_.date} ${itemList_.counting}")
                         .set(data)
@@ -64,7 +65,8 @@ class Todoadapter(private var itemList_ : ArrayList<ListLayout>): RecyclerView.A
                         "description" to itemList_.description,
                         "date" to itemList_.date,
                         "counting" to itemList_.counting,
-                        "checking" to check
+                        "checking" to check,
+                        "userid" to itemList_.userid
                     )
                     db.collection("Contacts").document("${itemList_.date} ${itemList_.counting}").set(data)
                     Toast.makeText(binding.root.context, "이 일을 아직 완수하지 못하셨네요! \n\"적용\"버튼을 눌러주세요!!", Toast.LENGTH_SHORT).show()
