@@ -44,7 +44,6 @@ class MypageFragment : Fragment() {
             val department = binding?.spDep?.selectedItem.toString()
             val kauid = binding?.etKauID?.text.toString()
 
-
             database = FirebaseDatabase.getInstance().getReference("Users")
             val User = User_Model(email, nickname, name, department, kauid)
 

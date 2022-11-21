@@ -19,7 +19,6 @@ class EntryFragment : Fragment() {
     lateinit var auth : FirebaseAuth
     lateinit var database : DatabaseReference
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
