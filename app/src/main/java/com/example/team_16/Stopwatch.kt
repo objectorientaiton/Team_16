@@ -15,8 +15,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.example.team_16.databinding.FragmentStopwatchBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import io.grpc.internal.DnsNameResolver.SrvRecord
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,21 +26,20 @@ import java.util.*
 @RequiresApi(Build.VERSION_CODES.O)
 @Suppress("DEPRECATION")
 class Stopwatch : Fragment() {
-
+    var email :String? = "None"
     var MillisecondTime: Long = 0
     var StartTime: Long = 0
     var TimeBuff: Long = 0
     var UpdateTime = 0L
     var handler = Handler()
     var isRunning: Boolean = false
-
+    var major_:String? = ""
     var Hours = 0
     var Seconds = 0
     var Minutes = 0
     var MilliSeconds = 0
 
     val db = FirebaseFirestore.getInstance()
-
     @SuppressLint("SimpleDateFormat")
     var today = SimpleDateFormat("yyyy-MM-dd")
         .format(Date(System.currentTimeMillis())) //오늘 날짜
@@ -48,8 +49,16 @@ class Stopwatch : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val email = arguments?.getString("email")
+        email = arguments?.getString("email")
         setFragmentResult("email", bundleOf("email" to email))
+        setFragmentResultListener("email"){key, bundle->
+            email = bundle.getString("email")
+        }
+        db.collection("Users").document("$email").get().addOnSuccessListener{
+            document ->
+            val major = document["department"] as String
+            major_ = major
+        }
         val docRef = db.collection("studytime").document("$today")
         docRef.get()
             .addOnSuccessListener { document ->
@@ -59,7 +68,8 @@ class Stopwatch : Fragment() {
                     val S = document.getString("second")
                     val MS = document.getString("millisecond")
                     val TB = document.getString("timebuff")
-                    if (H != null && M != null && S != null && MS != null && TB != null) {
+                    val user = document.getString("email")
+                    if (H != null && M != null && S != null && MS != null && TB != null && email == user ) {
                         Hours = H.toInt()
                         Minutes = M.toInt()
                         Seconds = S.toInt()
@@ -102,6 +112,7 @@ class Stopwatch : Fragment() {
             }
         }
         binding.btnStop.setOnClickListener {
+            Toast.makeText(activity, "$major_", Toast.LENGTH_SHORT).show()
             TimeBuff = UpdateTime
             handler?.removeCallbacks(runnable)
             isRunning = false
@@ -111,7 +122,8 @@ class Stopwatch : Fragment() {
                 "minute" to Minutes.toString(),
                 "second" to Seconds.toString(),
                 "millisecond" to MilliSeconds.toString(),
-                "timebuff" to TimeBuff.toString()
+                "timebuff" to TimeBuff.toString(),
+                "email" to email
             )
 
             db.collection("studytime")
@@ -138,7 +150,8 @@ class Stopwatch : Fragment() {
             "minute" to Minutes.toString(),
             "second" to Seconds.toString(),
             "millisecond" to MilliSeconds.toString(),
-            "timebuff" to TimeBuff.toString()
+            "timebuff" to TimeBuff.toString(),
+            "email" to email
         )
 
         db.collection("studytime")
@@ -198,7 +211,8 @@ class Stopwatch : Fragment() {
                 "minute" to Minutes.toString(),
                 "second" to Seconds.toString(),
                 "millisecond" to MilliSeconds.toString(),
-                "timebuff" to TimeBuff.toString()
+                "timebuff" to TimeBuff.toString(),
+                "email" to email
             )
             Log.v("알림", "set data $Hours $Minutes $Seconds $MilliSeconds $TimeBuff")
             db.collection("studytime")

@@ -10,12 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team_16.databinding.FragmentCalendarFragmentBinding
-import com.example.team_16.databinding.FragmentMypageBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ServerTimestamp
 import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -31,6 +31,7 @@ class calendar_fragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setFragmentResult("email", bundleOf("email" to email))
         setFragmentResultListener("email"){key, bundle->
             email = bundle.getString("email")
         }

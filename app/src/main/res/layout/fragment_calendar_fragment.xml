@@ -70,7 +70,8 @@
             android:layout_height="38dp"
             android:backgroundTint="#002870"
             android:text="추가"
-            android:textColor="#FFF79D" />
+            android:textColor="#FFF79D"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_re"
@@ -79,6 +80,7 @@
             android:backgroundTint="#002870"
             android:text="적용"
             android:textColor="#FFF79D"
+            android:textStyle="bold"
             app:iconTint="#FFF79D" />
     </LinearLayout>
 
