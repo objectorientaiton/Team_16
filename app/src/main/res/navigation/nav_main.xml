@@ -11,16 +11,16 @@
         tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_register_user_info_Fragment"
-            app:destination="@id/MypageFragment" />
+            app:destination="@id/user_info" />
         <action
             android:id="@+id/action_signupFragment_to_entryFragment"
-            app:destination="@id/MypageFragment" />
+            app:destination="@id/user_info" />
         <action
             android:id="@+id/action_signupFragment_to_Register_user_infoFragment"
-            app:destination="@id/MypageFragment" />
+            app:destination="@id/user_info" />
     </fragment>
     <fragment
-        android:id="@+id/MypageFragment"
+        android:id="@+id/user_info"
         android:name="com.example.team_16.Register_user_infoFragment"
         android:label="개인 정보 입력"
         tools:layout="@layout/fragment_register_user_info">
@@ -44,10 +44,9 @@
             app:destination="@id/stopwatchFragment_" />
     </fragment>
     <fragment
-        android:id="@+id/calendar_fragment"
-        android:name="com.example.team_16.calendar_fragment"
-        android:label="투두리스트"
-        tools:layout="@layout/fragment_calendar_fragment" />
+        android:id="@+id/todo"
+        android:name="com.example.team_16.Todo"
+        android:label="투두리스트" />
     <fragment
         android:id="@+id/findePWFragment"
         android:name="com.example.team_16.FindePWFragment"
@@ -64,6 +63,6 @@
         tools:layout="@layout/fragment_stopwatch">
         <action
             android:id="@+id/action_stopwatchFragment__to_calendar_fragment"
-            app:destination="@id/calendar_fragment" />
+            app:destination="@id/todo" />
     </fragment>
 </navigation>

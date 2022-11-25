@@ -10,13 +10,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.team_16.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignupFragment : Fragment() {
 
     var binding : FragmentSignupBinding? = null
     lateinit var auth : FirebaseAuth
     lateinit var database : DatabaseReference
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,29 +29,31 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
-
         binding?.btnSignupRegister?.setOnClickListener{
             val email = binding?.etEnterEmail?.text.toString()
             val password = binding?.etEnterPw?.text.toString()
             val confirmPW = binding?.etEnterRepw?.text.toString()
-
-            if(email.isNotEmpty() && password.isNotEmpty() && confirmPW.isNotEmpty()){
-                if(password == (confirmPW)){
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
-                        if(it.isSuccessful){
+            if (email.isNotEmpty() && password.isNotEmpty() && confirmPW.isNotEmpty()) {
+                if (password == (confirmPW)) {
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                        if (it.isSuccessful) {
                             Toast.makeText(activity, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                            findNavController().navigate(R.id.action_signupFragment_to_Register_user_infoFragment)
-
-                        }else{
-                            Toast.makeText(activity, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                            val bundle = Bundle().apply {
+                                putString("email", email)
+                            }
+                            findNavController().navigate(R.id.action_signupFragment_to_Register_user_infoFragment, bundle)
+                        } else {
+                            Toast.makeText(
+                                activity,
+                                it.exception.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(activity, "패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
-            }
-            else{
+            } else {
                 Toast.makeText(activity, "모든 항목을 입력하세요", Toast.LENGTH_SHORT).show()
             }
         }

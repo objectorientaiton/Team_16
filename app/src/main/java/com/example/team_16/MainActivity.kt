@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.calendar_fragment,
+                R.id.todo,
                 R.id.stopwatchFragment_,
                 R.id.entryFragment,
-                R.id.MypageFragment
+                R.id.user_info
             )
         )
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             // 바텀 네비게이션이 표시되는 Fragment
-            if (destination.id == R.id.calendar_fragment || destination.id == R.id.MypageFragment
+            if (destination.id == R.id.todo || destination.id == R.id.user_info
                 || destination.id == R.id.stopwatchFragment_
             ) {
                 binding.bottomNav.visibility = View.VISIBLE

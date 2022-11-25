@@ -17,16 +17,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import com.example.team_16.databinding.FragmentStopwatchBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.grpc.internal.DnsNameResolver.SrvRecord
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Calendar.getInstance
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Suppress("DEPRECATION")
 class Stopwatch : Fragment() {
-    var email :String? = "None"
+    var email_ :String? = "None"
     var MillisecondTime: Long = 0
     var StartTime: Long = 0
     var TimeBuff: Long = 0
@@ -49,12 +51,8 @@ class Stopwatch : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        email = arguments?.getString("email")
-        setFragmentResult("email", bundleOf("email" to email))
-        setFragmentResultListener("email"){key, bundle->
-            email = bundle.getString("email")
-        }
-        db.collection("Users").document("$email").get().addOnSuccessListener{
+        email_ = FirebaseAuth.getInstance().currentUser?.email ?: "None"
+        db.collection("Users").document("$email_").get().addOnSuccessListener{
             document ->
             val major = document["department"] as String
             major_ = major
@@ -69,7 +67,7 @@ class Stopwatch : Fragment() {
                     val MS = document.getString("millisecond")
                     val TB = document.getString("timebuff")
                     val user = document.getString("email")
-                    if (H != null && M != null && S != null && MS != null && TB != null && email == user ) {
+                    if (H != null && M != null && S != null && MS != null && TB != null && email_ == user ) {
                         Hours = H.toInt()
                         Minutes = M.toInt()
                         Seconds = S.toInt()
@@ -94,15 +92,12 @@ class Stopwatch : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentStopwatchBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         binding.btnStart.setOnClickListener {
             if (!isRunning) { // 중복호출 방지
                 StartTime = SystemClock.elapsedRealtime()
@@ -123,7 +118,7 @@ class Stopwatch : Fragment() {
                 "second" to Seconds.toString(),
                 "millisecond" to MilliSeconds.toString(),
                 "timebuff" to TimeBuff.toString(),
-                "email" to email
+                "email" to email_
             )
 
             db.collection("studytime")
@@ -151,7 +146,7 @@ class Stopwatch : Fragment() {
             "second" to Seconds.toString(),
             "millisecond" to MilliSeconds.toString(),
             "timebuff" to TimeBuff.toString(),
-            "email" to email
+            "email" to email_
         )
 
         db.collection("studytime")
@@ -183,11 +178,11 @@ class Stopwatch : Fragment() {
                         String.format("%03d", MilliSeconds)
             )
             handler.postDelayed(this, 0)
-            midnight()
+            //midnight()
         }
     }
 
-    fun midnight() {
+    /*fun midnight() {
         val date = Date()
         var calendar = Calendar.getInstance()
         calendar.setTime(date)
@@ -233,7 +228,8 @@ class Stopwatch : Fragment() {
         }
 
 
-    }
+    }*/
+
 
 }
 

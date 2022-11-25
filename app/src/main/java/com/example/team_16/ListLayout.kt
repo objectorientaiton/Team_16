@@ -1,8 +1,11 @@
 package com.example.team_16
 
-class ListLayout(val date:String = "None" ,
-                 val description: String = "None",
-                 val counting : String = "0",
-                 val checking : String = "0",
-                 val userid : String = "None"
-)
+import android.os.Parcelable
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.auth.User
+
+class ListLayout(
+                val date:String,
+                val description: String,
+                val counting : String,
+                val checking : String)

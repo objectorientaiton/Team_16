@@ -32,12 +32,11 @@ class Register_user_infoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
-
+        val email = arguments?.getString("email")
 // val department_data = arrayOf("경영학부","항공교통물류학부","항공운항학과","항공우주 및 기계공학부", "항공전자정보공학부", "소프트웨어학과", "스마트드론공학과", "AI자율주행시스템공학과", "자유전공학부")
 
 
         binding?.btnRegisterMypage?.setOnClickListener{
-            val email = binding?.etEmailMypage?.text.toString()
             val nickname = binding?.etNickname?.text.toString()
             val name = binding?.etName?.text.toString()
             val department = binding?.spDep?.selectedItem.toString()
@@ -49,7 +48,6 @@ class Register_user_infoFragment : Fragment() {
 
 
             database.child(nickname).setValue(User).addOnSuccessListener {
-                binding?.etEmailMypage?.text?.clear()
                 binding?.etNickname?.text?.clear()
                 binding?.etName?.text?.clear()
                 binding?.etKauID?.text?.clear()
@@ -62,7 +60,7 @@ class Register_user_infoFragment : Fragment() {
             }
 
             val user_info = hashMapOf(
-                "email" to binding?.etEmailMypage?.text.toString(),
+                "email" to email,
                 "nickname" to binding?.etNickname?.text.toString(),
                 "name" to binding?.etName?.text.toString(),
                 "department" to binding?.spDep?.selectedItem.toString(),
